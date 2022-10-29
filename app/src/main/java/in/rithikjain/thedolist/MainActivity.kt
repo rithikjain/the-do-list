@@ -17,7 +17,10 @@ class MainActivity : GlanceViewerActivity() {
         return when (receiver) {
             TheDoListWidgetReceiver::class.java -> GlanceSnapshot(
                 instance = TheDoListWidget(),
-                state = mutablePreferencesOf(TheDoListWidget.PREF_COLOR to 0xBF293462)
+                state = mutablePreferencesOf(
+                    TheDoListWidget.PREF_COLOR to 0xBF293462,
+                    TheDoListWidget.PREF_SELECTED_ID to 1,
+                )
             )
             else -> throw IllegalArgumentException()
         }
