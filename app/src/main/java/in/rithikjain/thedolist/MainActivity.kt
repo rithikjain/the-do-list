@@ -18,7 +18,6 @@ class MainActivity : GlanceViewerActivity() {
             TheDoListWidgetReceiver::class.java -> GlanceSnapshot(
                 instance = TheDoListWidget(),
                 state = mutablePreferencesOf(
-                    TheDoListWidget.PREF_COLOR to 0x1A1F51FF,
                     TheDoListWidget.PREF_SELECTED_ID to 1,
                 )
             )

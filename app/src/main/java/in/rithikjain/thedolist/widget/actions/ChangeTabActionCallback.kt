@@ -14,11 +14,9 @@ class ChangeTabActionCallback : ActionCallback {
         glanceId: GlanceId,
         parameters: ActionParameters,
     ) {
-        val color = parameters[TheDoListWidget.PARAM_COLOR] ?: 0x1A1F51FF
         val id = parameters[TheDoListWidget.PARAM_SELECTED_ID] ?: 1
 
         updateAppWidgetState(context, glanceId) {
-            it[TheDoListWidget.PREF_COLOR] = color
             it[TheDoListWidget.PREF_SELECTED_ID] = id
         }
 

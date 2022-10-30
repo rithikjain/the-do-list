@@ -25,7 +25,9 @@ fun TabBar(
         contentAlignment = Alignment.Center
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            tabs.forEachIndexed { i, tab ->
+            tabs.entries.forEach { entry ->
+
+                val tab = entry.value
 
                 var modifier = GlanceModifier.size(22.dp)
 
@@ -45,13 +47,12 @@ fun TabBar(
                             .background(tab.tabBackground)
                             .clickable(actionRunCallback<ChangeTabActionCallback>(
                                 actionParametersOf(
-                                    TheDoListWidget.PARAM_COLOR to tab.tabColor,
                                     TheDoListWidget.PARAM_SELECTED_ID to tab.id,
                                 )
                             ))
                     ) {}
                 }
-                if (i != tabs.size - 1) {
+                if (entry.key != tabs.size) {
                     Spacer(modifier = GlanceModifier.width(18.dp))
                 }
             }

@@ -1,6 +1,7 @@
 package `in`.rithikjain.thedolist.widget
 
 import `in`.rithikjain.thedolist.R
+import `in`.rithikjain.thedolist.data.tabs
 import `in`.rithikjain.thedolist.widget.components.TabBar
 import `in`.rithikjain.thedolist.widget.components.TaskTile
 import androidx.compose.runtime.Composable
@@ -27,8 +28,8 @@ class TheDoListWidget : GlanceAppWidget() {
     @Composable
     override fun Content() {
 
-        val backgroundColor = currentState(PREF_COLOR) ?: 0x261F51FF
         val selectedTabID = currentState(PREF_SELECTED_ID) ?: 1
+        val tab = tabs[selectedTabID]!!
 
         Box(
             modifier = GlanceModifier
@@ -37,10 +38,14 @@ class TheDoListWidget : GlanceAppWidget() {
         ) {
             Column {
                 TabBar(selectedTabID)
-                Box(modifier = GlanceModifier.fillMaxSize().background(Color(backgroundColor))) {
+                Box(
+                    modifier = GlanceModifier
+                        .fillMaxSize()
+                        .background(Color(tab.tasksBackgroundColor))
+                ) {
                     LazyColumn {
                         items(100) { i ->
-                            TaskTile(task = "Task $i")
+                            TaskTile(task = "Task $i", tab.tasksColor, tab.tasksUnselectedImage)
                         }
                     }
                 }
@@ -49,9 +54,6 @@ class TheDoListWidget : GlanceAppWidget() {
     }
 
     companion object {
-        val PREF_COLOR = longPreferencesKey("color")
-        val PARAM_COLOR = ActionParameters.Key<Long>("color")
-
         val PREF_SELECTED_ID = intPreferencesKey("selected_id")
         val PARAM_SELECTED_ID = ActionParameters.Key<Int>("selected_id")
     }
