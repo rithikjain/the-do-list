@@ -26,14 +26,12 @@ import androidx.glance.state.PreferencesGlanceStateDefinition
 
 class TheDoListWidget : GlanceAppWidget() {
 
-    override val stateDefinition = PreferencesGlanceStateDefinition
-
     override val sizeMode = SizeMode.Single
 
     @Composable
     override fun Content() {
 
-        val backgroundColor = currentState(PREF_COLOR) ?: 0xBF293462
+        val backgroundColor = currentState(PREF_COLOR) ?: 0x261F51FF
         val selectedTabID = currentState(PREF_SELECTED_ID) ?: 1
 
         Box(
@@ -44,8 +42,7 @@ class TheDoListWidget : GlanceAppWidget() {
             Column {
                 Box(
                     modifier = GlanceModifier
-                        .fillMaxWidth().height(40.dp)
-                        .background(ImageProvider(R.drawable.black_top_round_12)),
+                        .fillMaxWidth().height(40.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -94,10 +91,11 @@ class TheDoListWidget : GlanceAppWidget() {
 
     companion object {
         val tabs = listOf(
-            Tab(1, ImageProvider(R.drawable.blue_circle), 0xBF293462),
-            Tab(2, ImageProvider(R.drawable.indigo_circle), 0xBF2E0249),
-            Tab(3, ImageProvider(R.drawable.navy_blue_circle), 0xBF143F6B),
-            Tab(4, ImageProvider(R.drawable.purple_circle), 0xBF541690),
+            Tab(1, ImageProvider(R.drawable.blue_circle), 0x1A1F51FF),
+            Tab(2, ImageProvider(R.drawable.purple_circle), 0x1Aab20fd),
+            Tab(3, ImageProvider(R.drawable.green_circle), 0x0D39FF14),
+            Tab(4, ImageProvider(R.drawable.red_circle), 0x26FF3131),
+            Tab(5, ImageProvider(R.drawable.yellow_circle), 0x26FFFF00),
         )
 
         val PREF_COLOR = longPreferencesKey("color")
@@ -114,7 +112,7 @@ class ChangeTabActionCallback : ActionCallback {
         glanceId: GlanceId,
         parameters: ActionParameters,
     ) {
-        val color = parameters[TheDoListWidget.PARAM_COLOR] ?: 0xBF293462
+        val color = parameters[TheDoListWidget.PARAM_COLOR] ?: 0x261F51FF
         val id = parameters[TheDoListWidget.PARAM_SELECTED_ID] ?: 1
 
         updateAppWidgetState(context, glanceId) {
