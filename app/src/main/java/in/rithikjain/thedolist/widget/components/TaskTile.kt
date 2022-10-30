@@ -14,12 +14,6 @@ fun TaskTile(task: String) {
         Text(
             task,
         )
-        Spacer(modifier = GlanceModifier.height(16.dp))
-        Box(
-            modifier = GlanceModifier
-                .fillMaxWidth()
-                .height(0.5.dp)
-                .background(Color(0x20FFFFFF))
-        ) {}
+        Spacer(modifier = GlanceModifier.height(8.dp))
     }
 }

@@ -1,28 +1,24 @@
 package `in`.rithikjain.thedolist.widget
 
 import `in`.rithikjain.thedolist.R
-import `in`.rithikjain.thedolist.data.Tab
-import `in`.rithikjain.thedolist.utils.conditional
+import `in`.rithikjain.thedolist.widget.components.TabBar
 import `in`.rithikjain.thedolist.widget.components.TaskTile
-import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
-import androidx.glance.*
+import androidx.glance.GlanceModifier
+import androidx.glance.ImageProvider
 import androidx.glance.action.ActionParameters
-import androidx.glance.action.actionParametersOf
-import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.SizeMode
-import androidx.glance.appwidget.action.ActionCallback
-import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.lazy.LazyColumn
-import androidx.glance.appwidget.state.updateAppWidgetState
-import androidx.glance.layout.*
-import androidx.glance.state.PreferencesGlanceStateDefinition
+import androidx.glance.background
+import androidx.glance.currentState
+import androidx.glance.layout.Box
+import androidx.glance.layout.Column
+import androidx.glance.layout.fillMaxSize
 
 class TheDoListWidget : GlanceAppWidget() {
 
@@ -40,44 +36,7 @@ class TheDoListWidget : GlanceAppWidget() {
                 .background(ImageProvider(R.drawable.widget_background))
         ) {
             Column {
-                Box(
-                    modifier = GlanceModifier
-                        .fillMaxWidth().height(40.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        tabs.forEachIndexed { i, tab ->
-
-                            var modifier = GlanceModifier.size(24.dp)
-
-                            modifier = if (tab.id == selectedTabID) {
-                                modifier.then(GlanceModifier.background(ImageProvider(R.drawable.selected_circle)))
-                            } else {
-                                modifier.then(GlanceModifier.background(Color.Transparent))
-                            }
-
-                            Box(
-                                modifier = modifier,
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Box(
-                                    modifier = GlanceModifier
-                                        .size(22.dp)
-                                        .background(tab.tabBackground)
-                                        .clickable(actionRunCallback<ChangeTabActionCallback>(
-                                            actionParametersOf(
-                                                PARAM_COLOR to tab.tabColor,
-                                                PARAM_SELECTED_ID to tab.id,
-                                            )
-                                        ))
-                                ) {}
-                            }
-                            if (i != tabs.size - 1) {
-                                Spacer(modifier = GlanceModifier.width(18.dp))
-                            }
-                        }
-                    }
-                }
+                TabBar(selectedTabID)
                 Box(modifier = GlanceModifier.fillMaxSize().background(Color(backgroundColor))) {
                     LazyColumn {
                         items(100) { i ->
@@ -90,37 +49,11 @@ class TheDoListWidget : GlanceAppWidget() {
     }
 
     companion object {
-        val tabs = listOf(
-            Tab(1, ImageProvider(R.drawable.blue_circle), 0x1A1F51FF),
-            Tab(2, ImageProvider(R.drawable.purple_circle), 0x1Aab20fd),
-            Tab(3, ImageProvider(R.drawable.green_circle), 0x0D39FF14),
-            Tab(4, ImageProvider(R.drawable.red_circle), 0x26FF3131),
-            Tab(5, ImageProvider(R.drawable.yellow_circle), 0x26FFFF00),
-        )
-
         val PREF_COLOR = longPreferencesKey("color")
         val PARAM_COLOR = ActionParameters.Key<Long>("color")
 
         val PREF_SELECTED_ID = intPreferencesKey("selected_id")
         val PARAM_SELECTED_ID = ActionParameters.Key<Int>("selected_id")
-    }
-}
-
-class ChangeTabActionCallback : ActionCallback {
-    override suspend fun onAction(
-        context: Context,
-        glanceId: GlanceId,
-        parameters: ActionParameters,
-    ) {
-        val color = parameters[TheDoListWidget.PARAM_COLOR] ?: 0x261F51FF
-        val id = parameters[TheDoListWidget.PARAM_SELECTED_ID] ?: 1
-
-        updateAppWidgetState(context, glanceId) {
-            it[TheDoListWidget.PREF_COLOR] = color
-            it[TheDoListWidget.PREF_SELECTED_ID] = id
-        }
-
-        TheDoListWidget().update(context, glanceId)
     }
 }
 
