@@ -20,8 +20,7 @@ fun TabBar(
     selectedTabID: Int,
 ) {
     Box(
-        modifier = GlanceModifier
-            .fillMaxWidth().height(40.dp),
+        modifier = GlanceModifier.height(40.dp),
         contentAlignment = Alignment.Center
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
