@@ -6,6 +6,7 @@ import `in`.rithikjain.thedolist.widget.actions.ChangeTabActionCallback
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
+import androidx.glance.ImageProvider
 import androidx.glance.action.actionParametersOf
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.action.actionRunCallback
@@ -25,7 +26,8 @@ fun TabBar(
                 val tab = entry.value
 
                 val tabBackground =
-                    if (tab.id == selectedTabID) tab.tabBackground else tab.tabUnselectedBackground
+                    if (tab.id == selectedTabID) ImageProvider(tab.tabBackground)
+                    else ImageProvider(tab.tabUnselectedBackground)
 
                 Box(
                     modifier = GlanceModifier

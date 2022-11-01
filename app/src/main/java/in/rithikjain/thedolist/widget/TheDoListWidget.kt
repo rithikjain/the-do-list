@@ -1,24 +1,21 @@
 package `in`.rithikjain.thedolist.widget
 
 import `in`.rithikjain.thedolist.R
-import `in`.rithikjain.thedolist.db.AppDatabase
 import `in`.rithikjain.thedolist.models.tabs
 import `in`.rithikjain.thedolist.utils.Constants
 import `in`.rithikjain.thedolist.widget.components.ActionBar
 import `in`.rithikjain.thedolist.widget.components.TabBar
-import `in`.rithikjain.thedolist.widget.components.TaskTile
 import `in`.rithikjain.thedolist.widget.components.TasksSection
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.glance.*
-import androidx.glance.action.ActionParameters
+import androidx.glance.GlanceModifier
+import androidx.glance.ImageProvider
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.SizeMode
-import androidx.glance.appwidget.lazy.LazyColumn
+import androidx.glance.background
+import androidx.glance.currentState
 import androidx.glance.layout.*
 
 class TheDoListWidget : GlanceAppWidget() {

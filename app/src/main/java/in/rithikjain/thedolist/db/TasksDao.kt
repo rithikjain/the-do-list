@@ -12,7 +12,7 @@ interface TasksDao {
     fun getAllTasksByTabID(tabID: Int): List<Task>
 
     @Insert
-    suspend fun insertTasks(tasks: List<Task>)
+    suspend fun insertTask(task: Task)
 
     @Query("UPDATE task SET is_completed=:isCompleted WHERE uid=:taskID")
     suspend fun updateTaskStatus(taskID: Int, isCompleted: Boolean)

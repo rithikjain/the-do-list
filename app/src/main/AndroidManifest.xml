@@ -19,7 +19,8 @@
             android:exported="true"
             android:label="@string/title_activity_add_task"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AppCompat.Translucent" />
+            android:theme="@style/Theme.AppCompat.Translucent"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".MainActivity"

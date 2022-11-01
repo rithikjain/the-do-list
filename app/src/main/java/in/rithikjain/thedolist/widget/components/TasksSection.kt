@@ -6,6 +6,7 @@ import `in`.rithikjain.thedolist.models.Task
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
+import androidx.glance.ImageProvider
 import androidx.glance.LocalContext
 import androidx.glance.appwidget.lazy.LazyColumn
 import androidx.glance.appwidget.lazy.items
@@ -27,8 +28,8 @@ fun TasksSection(tab: Tab) {
                 taskID = task.uid,
                 task = task.content,
                 isCompleted = task.isCompleted,
-                selectedImage = tab.tasksSelectedImage,
-                unselectedImage = tab.tasksUnselectedImage,
+                selectedImage = ImageProvider(tab.tasksSelectedImage),
+                unselectedImage = ImageProvider(tab.tasksUnselectedImage),
             )
         }
     }

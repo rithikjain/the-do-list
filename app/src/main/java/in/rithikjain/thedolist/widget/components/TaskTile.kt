@@ -40,7 +40,8 @@ fun SelectedBox(taskID: Int, selectedImage: ImageProvider) {
         modifier = GlanceModifier
             .size(16.dp)
             .background(selectedImage)
-            .clickable(setTaskStatus(taskID, false))
+            .clickable(setTaskStatus(taskID, false)),
+        contentAlignment = Alignment.Center
     ) {}
 }
 
@@ -51,7 +52,7 @@ fun UnSelectedBox(taskID: Int, unselectedImage: ImageProvider) {
             .size(16.dp)
             .background(unselectedImage)
             .clickable(setTaskStatus(taskID, true)),
-        contentAlignment = Alignment.Center,
+        contentAlignment = Alignment.Center
     ) {}
 }
 

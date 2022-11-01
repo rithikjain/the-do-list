@@ -18,6 +18,7 @@ abstract class AppDatabase : RoomDatabase() {
     companion object : SingletonHolder<AppDatabase, Context>({
         Room.databaseBuilder(it.applicationContext, AppDatabase::class.java, "thedolist.db")
             .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
             .build()
     })
 }
