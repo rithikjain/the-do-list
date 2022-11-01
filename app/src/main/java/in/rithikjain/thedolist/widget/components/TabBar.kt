@@ -27,29 +27,20 @@ fun TabBar(
 
                 val tab = entry.value
 
-                var modifier = GlanceModifier.size(22.dp)
-
-                modifier = if (tab.id == selectedTabID) {
-                    modifier.then(GlanceModifier.background(ImageProvider(R.drawable.selected_circle)))
-                } else {
-                    modifier.then(GlanceModifier.background(Color.Transparent))
-                }
+                val tabBackground =
+                    if (tab.id == selectedTabID) tab.tabBackground else tab.tabUnselectedBackground
 
                 Box(
-                    modifier = modifier,
-                    contentAlignment = Alignment.Center
-                ) {
-                    Box(
-                        modifier = GlanceModifier
-                            .size(19.dp)
-                            .background(tab.tabBackground)
-                            .clickable(actionRunCallback<ChangeTabActionCallback>(
-                                actionParametersOf(
-                                    Constants.PARAM_SELECTED_TAB_ID to tab.id,
-                                )
-                            ))
-                    ) {}
-                }
+                    modifier = GlanceModifier
+                        .size(22.dp)
+                        .background(tabBackground)
+                        .clickable(actionRunCallback<ChangeTabActionCallback>(
+                            actionParametersOf(
+                                Constants.PARAM_SELECTED_TAB_ID to tab.id,
+                            )
+                        ))
+                ) {}
+
                 if (entry.key != tabs.size) {
                     Spacer(modifier = GlanceModifier.width(18.dp))
                 }
