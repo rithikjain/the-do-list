@@ -16,7 +16,7 @@ import androidx.glance.layout.height
 fun TasksSection(tab: Tab) {
 
     val db = AppDatabase.getInstance(LocalContext.current)
-    val tasks = db.tasksDao().getAllTasks()
+    val tasks = db.tasksDao().getAllTasksByTabID(tab.id)
 
     LazyColumn {
         item {
