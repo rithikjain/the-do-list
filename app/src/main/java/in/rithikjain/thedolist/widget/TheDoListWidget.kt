@@ -38,7 +38,10 @@ class TheDoListWidget : GlanceAppWidget() {
         ) {
             Column {
                 Row(
-                    modifier = GlanceModifier.fillMaxWidth().padding(horizontal = 16.dp),
+                    modifier = GlanceModifier
+                        .fillMaxWidth()
+                        .height(48.dp)
+                        .padding(horizontal = 16.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     TabBar(selectedTabID)
@@ -50,6 +53,9 @@ class TheDoListWidget : GlanceAppWidget() {
                         .background(Color(tab.tasksBackgroundColor))
                 ) {
                     LazyColumn {
+                        item {
+                            Spacer(modifier = GlanceModifier.height(16.dp))
+                        }
                         items(100) { i ->
                             TaskTile(task = "Task $i", tab.tasksColor, tab.tasksUnselectedImage)
                         }
