@@ -1,17 +1,14 @@
 package `in`.rithikjain.thedolist.ui.screens
 
+import `in`.rithikjain.thedolist.ui.screens.ui.theme.TheDoListTheme
+import `in`.rithikjain.thedolist.utils.Constants
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import `in`.rithikjain.thedolist.ui.screens.ui.theme.TheDoListTheme
-import `in`.rithikjain.thedolist.widget.TheDoListWidget
 import androidx.compose.ui.graphics.Color
 
 class AddTaskActivity : ComponentActivity() {
@@ -21,7 +18,7 @@ class AddTaskActivity : ComponentActivity() {
         var tabID = -1
 
         intent?.extras?.let {
-            tabID = it.getInt(TheDoListWidget.SELECTED_TAB_ID_KEY)
+            tabID = it.getInt(Constants.SELECTED_TAB_ID_KEY)
         }
 
         setContent {

@@ -2,7 +2,7 @@ package `in`.rithikjain.thedolist.widget.components
 
 import `in`.rithikjain.thedolist.R
 import `in`.rithikjain.thedolist.ui.screens.AddTaskActivity
-import `in`.rithikjain.thedolist.widget.TheDoListWidget
+import `in`.rithikjain.thedolist.utils.Constants
 import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
@@ -36,7 +36,7 @@ fun ActionBar(selectedTabId: Int) {
                     AddTaskActivity::class.java
                 ).addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS),
                 actionParametersOf(
-                    TheDoListWidget.PARAM_SELECTED_TAB_ID to selectedTabId
+                    Constants.PARAM_SELECTED_TAB_ID to selectedTabId
                 )
             )),
         )

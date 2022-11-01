@@ -1,5 +1,6 @@
 package `in`.rithikjain.thedolist
 
+import `in`.rithikjain.thedolist.utils.Constants
 import `in`.rithikjain.thedolist.widget.TheDoListWidget
 import `in`.rithikjain.thedolist.widget.TheDoListWidgetReceiver
 import androidx.datastore.preferences.core.mutablePreferencesOf
@@ -18,7 +19,7 @@ class MainActivity : GlanceViewerActivity() {
             TheDoListWidgetReceiver::class.java -> GlanceSnapshot(
                 instance = TheDoListWidget(),
                 state = mutablePreferencesOf(
-                    TheDoListWidget.PREF_SELECTED_TAB_ID to 1,
+                    Constants.PREF_SELECTED_TAB_ID to 1,
                 )
             )
             else -> throw IllegalArgumentException()

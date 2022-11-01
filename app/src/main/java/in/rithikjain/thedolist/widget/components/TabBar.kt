@@ -1,8 +1,8 @@
 package `in`.rithikjain.thedolist.widget.components
 
 import `in`.rithikjain.thedolist.R
-import `in`.rithikjain.thedolist.data.tabs
-import `in`.rithikjain.thedolist.widget.TheDoListWidget
+import `in`.rithikjain.thedolist.models.tabs
+import `in`.rithikjain.thedolist.utils.Constants
 import `in`.rithikjain.thedolist.widget.actions.ChangeTabActionCallback
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -45,7 +45,7 @@ fun TabBar(
                             .background(tab.tabBackground)
                             .clickable(actionRunCallback<ChangeTabActionCallback>(
                                 actionParametersOf(
-                                    TheDoListWidget.PARAM_SELECTED_TAB_ID to tab.id,
+                                    Constants.PARAM_SELECTED_TAB_ID to tab.id,
                                 )
                             ))
                     ) {}
