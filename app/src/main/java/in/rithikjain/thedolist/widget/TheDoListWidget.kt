@@ -5,13 +5,10 @@ import `in`.rithikjain.thedolist.data.tabs
 import `in`.rithikjain.thedolist.widget.components.ActionBar
 import `in`.rithikjain.thedolist.widget.components.TabBar
 import `in`.rithikjain.thedolist.widget.components.TaskTile
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.glance.*
 import androidx.glance.action.ActionParameters
 import androidx.glance.appwidget.GlanceAppWidget
@@ -19,7 +16,6 @@ import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.lazy.LazyColumn
 import androidx.glance.layout.*
-import androidx.glance.text.Text
 
 class TheDoListWidget : GlanceAppWidget() {
 
@@ -28,7 +24,7 @@ class TheDoListWidget : GlanceAppWidget() {
     @Composable
     override fun Content() {
 
-        val selectedTabID = currentState(PREF_SELECTED_ID) ?: 1
+        val selectedTabID = currentState(PREF_SELECTED_TAB_ID) ?: 1
         val tab = tabs[selectedTabID]!!
 
         Box(
@@ -66,8 +62,9 @@ class TheDoListWidget : GlanceAppWidget() {
     }
 
     companion object {
-        val PREF_SELECTED_ID = intPreferencesKey("selected_id")
-        val PARAM_SELECTED_ID = ActionParameters.Key<Int>("selected_id")
+        const val SELECTED_TAB_ID_KEY = "selected_tab_id"
+        val PREF_SELECTED_TAB_ID = intPreferencesKey(SELECTED_TAB_ID_KEY)
+        val PARAM_SELECTED_TAB_ID = ActionParameters.Key<Int>(SELECTED_TAB_ID_KEY)
     }
 }
 

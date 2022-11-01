@@ -18,7 +18,7 @@ class MainActivity : GlanceViewerActivity() {
             TheDoListWidgetReceiver::class.java -> GlanceSnapshot(
                 instance = TheDoListWidget(),
                 state = mutablePreferencesOf(
-                    TheDoListWidget.PREF_SELECTED_ID to 1,
+                    TheDoListWidget.PREF_SELECTED_TAB_ID to 1,
                 )
             )
             else -> throw IllegalArgumentException()

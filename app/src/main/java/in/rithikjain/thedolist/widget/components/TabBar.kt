@@ -45,7 +45,7 @@ fun TabBar(
                             .background(tab.tabBackground)
                             .clickable(actionRunCallback<ChangeTabActionCallback>(
                                 actionParametersOf(
-                                    TheDoListWidget.PARAM_SELECTED_ID to tab.id,
+                                    TheDoListWidget.PARAM_SELECTED_TAB_ID to tab.id,
                                 )
                             ))
                     ) {}

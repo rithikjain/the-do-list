@@ -14,10 +14,10 @@ class ChangeTabActionCallback : ActionCallback {
         glanceId: GlanceId,
         parameters: ActionParameters,
     ) {
-        val id = parameters[TheDoListWidget.PARAM_SELECTED_ID] ?: 1
+        val id = parameters[TheDoListWidget.PARAM_SELECTED_TAB_ID] ?: 1
 
         updateAppWidgetState(context, glanceId) {
-            it[TheDoListWidget.PREF_SELECTED_ID] = id
+            it[TheDoListWidget.PREF_SELECTED_TAB_ID] = id
         }
 
         TheDoListWidget().update(context, glanceId)

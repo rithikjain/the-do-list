@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">The Do List</string>
+    <string name="title_activity_add_task">AddTaskActivity</string>
 </resources>
