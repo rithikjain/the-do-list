@@ -19,22 +19,23 @@ fun ActionBar(selectedTabId: Int) {
         modifier = GlanceModifier.fillMaxWidth(),
         horizontalAlignment = Alignment.End
     ) {
-        Image(
-            ImageProvider(R.drawable.ic_settings),
-            contentDescription = "Settings Icon",
-            modifier = GlanceModifier.size(24.dp).clickable(actionStartActivity(
-                Intent(
-                    LocalContext.current,
-                    SettingsActivity::class.java
-                ).setFlags(
-                    Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                            and Intent.FLAG_ACTIVITY_NEW_TASK
-                            and Intent.FLAG_ACTIVITY_CLEAR_TASK
-                )
-            )),
-        )
-
-        Spacer(modifier = GlanceModifier.width(16.dp))
+        // TODO: Add a settings page
+//        Image(
+//            ImageProvider(R.drawable.ic_settings),
+//            contentDescription = "Settings Icon",
+//            modifier = GlanceModifier.size(24.dp).clickable(actionStartActivity(
+//                Intent(
+//                    LocalContext.current,
+//                    SettingsActivity::class.java
+//                ).setFlags(
+//                    Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+//                            and Intent.FLAG_ACTIVITY_NEW_TASK
+//                            and Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                )
+//            )),
+//        )
+//
+//        Spacer(modifier = GlanceModifier.width(16.dp))
 
         Image(
             ImageProvider(R.drawable.ic_add),

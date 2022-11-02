@@ -6,6 +6,7 @@ import `in`.rithikjain.thedolist.utils.Constants
 import `in`.rithikjain.thedolist.widget.actions.SetTaskStatusActionCallback
 import android.content.Intent
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.GlanceModifier
@@ -27,15 +28,15 @@ fun TaskTile(
     selectedImage: ImageProvider,
     unselectedImage: ImageProvider,
 ) {
-    Column(modifier = GlanceModifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+    Column(modifier = GlanceModifier.padding(horizontal = 16.dp, vertical = 6.dp)) {
+        Row(verticalAlignment = Alignment.Top) {
             if (task.isCompleted) SelectedBox(task.uid,
                 selectedImage) else UnSelectedBox(task.uid,
                 unselectedImage)
             Spacer(modifier = GlanceModifier.width(8.dp))
             Text(task.content,
                 style = TextStyle(fontSize = 16.sp),
-                modifier = GlanceModifier.clickable(
+                modifier = GlanceModifier.padding(top = (-4).dp).clickable(
                     actionStartActivity(
                         Intent(
                             LocalContext.current,

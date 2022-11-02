@@ -10,8 +10,7 @@ import androidx.glance.ImageProvider
 import androidx.glance.LocalContext
 import androidx.glance.appwidget.lazy.LazyColumn
 import androidx.glance.appwidget.lazy.items
-import androidx.glance.layout.Spacer
-import androidx.glance.layout.height
+import androidx.glance.layout.*
 
 @Composable
 fun TasksSection(tab: Tab) {
@@ -19,9 +18,9 @@ fun TasksSection(tab: Tab) {
     val db = AppDatabase.getInstance(LocalContext.current)
     val tasks = db.tasksDao().getAllTasksByTabID(tab.id)
 
-    LazyColumn {
+    LazyColumn(modifier = GlanceModifier.fillMaxHeight()) {
         item {
-            Spacer(modifier = GlanceModifier.height(16.dp))
+            Box(modifier = GlanceModifier.height(10.dp)) {}
         }
         items(tasks) { task: Task ->
             TaskTile(
@@ -30,6 +29,9 @@ fun TasksSection(tab: Tab) {
                 selectedImage = ImageProvider(tab.tasksSelectedImage),
                 unselectedImage = ImageProvider(tab.tasksUnselectedImage),
             )
+        }
+        item {
+            Box(modifier = GlanceModifier.height(12.dp)) {}
         }
     }
 }
