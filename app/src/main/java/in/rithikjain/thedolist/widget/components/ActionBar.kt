@@ -24,6 +24,7 @@ fun ActionBar(selectedTabId: Int) {
 //            modifier = GlanceModifier.size(22.dp),
 //        )
 //        Spacer(modifier = GlanceModifier.width(16.dp))
+
         Image(
             ImageProvider(R.drawable.ic_add),
             contentDescription = "Add Icon",
@@ -31,7 +32,7 @@ fun ActionBar(selectedTabId: Int) {
                 Intent(
                     LocalContext.current,
                     AddTaskActivity::class.java
-                ).addFlags(
+                ).setFlags(
                     Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
                             and Intent.FLAG_ACTIVITY_NEW_TASK
                             and Intent.FLAG_ACTIVITY_CLEAR_TASK

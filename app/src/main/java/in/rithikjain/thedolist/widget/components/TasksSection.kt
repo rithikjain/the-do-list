@@ -25,9 +25,7 @@ fun TasksSection(tab: Tab) {
         }
         items(tasks) { task: Task ->
             TaskTile(
-                taskID = task.uid,
-                task = task.content,
-                isCompleted = task.isCompleted,
+                task = task,
                 selectedTabId = tab.id,
                 selectedImage = ImageProvider(tab.tasksSelectedImage),
                 unselectedImage = ImageProvider(tab.tasksUnselectedImage),

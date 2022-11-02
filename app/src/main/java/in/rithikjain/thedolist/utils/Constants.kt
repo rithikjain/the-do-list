@@ -14,9 +14,12 @@ object Constants {
     const val IS_TASK_COMPLETED_KEY = "is_task_completed"
     val PARAM_IS_TASK_COMPLETED = ActionParameters.Key<Boolean>(IS_TASK_COMPLETED_KEY)
 
-    const val IS_EDIT_TASK_KEY = "is_edit_task_key"
+    const val IS_EDIT_TASK_KEY = "is_edit_task"
     val PARAM_IS_EDIT_TASK = ActionParameters.Key<Boolean>(IS_EDIT_TASK_KEY)
 
-    const val TASK_CONTENT_KEY = "task_content_key"
+    const val TASK_CONTENT_KEY = "task_content"
     val PARAM_TASK_CONTENT = ActionParameters.Key<String>(TASK_CONTENT_KEY)
+
+    const val TASK_CREATED_AT_KEY = "task_created_at"
+    val PARAM_TASK_CREATED_AT = ActionParameters.Key<Long>(TASK_CREATED_AT_KEY)
 }

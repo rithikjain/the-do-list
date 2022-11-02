@@ -39,6 +39,8 @@ import androidx.glance.appwidget.GlanceAppWidgetManager
 import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddTaskActivity : ComponentActivity() {
 
@@ -47,6 +49,7 @@ class AddTaskActivity : ComponentActivity() {
     private var taskContent = ""
     private var taskID = -1
     private var isTaskCompleted = false
+    private var taskCreatedAt: Long = 0
 
     @OptIn(ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +63,7 @@ class AddTaskActivity : ComponentActivity() {
             }
             taskID = it.getInt(Constants.TASK_ID_KEY)
             isTaskCompleted = it.getBoolean(Constants.IS_TASK_COMPLETED_KEY)
+            taskCreatedAt = it.getLong(Constants.TASK_CREATED_AT_KEY)
         }
 
         setContent {
@@ -171,7 +175,7 @@ class AddTaskActivity : ComponentActivity() {
                                     colorFilter = ColorFilter.tint(Color.Gray)
                                 )
 
-                                Text("Created on 2 Nov 2022", fontSize = 14.sp, color = Color.Gray)
+                                Text(getFormattedDate(), fontSize = 14.sp, color = Color.Gray)
                             }
                         }
                     }
@@ -219,6 +223,12 @@ class AddTaskActivity : ComponentActivity() {
             }
             finish()
         }
+    }
+
+    private fun getFormattedDate(): String {
+        val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH)
+        val datetime = Date(taskCreatedAt)
+        return "Created on ${dateFormat.format(datetime)}"
     }
 
     override fun onPause() {

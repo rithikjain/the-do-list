@@ -1,5 +1,6 @@
 package `in`.rithikjain.thedolist.widget.components
 
+import `in`.rithikjain.thedolist.models.Task
 import `in`.rithikjain.thedolist.ui.screens.add_task.AddTaskActivity
 import `in`.rithikjain.thedolist.utils.Constants
 import `in`.rithikjain.thedolist.widget.actions.SetTaskStatusActionCallback
@@ -21,37 +22,39 @@ import androidx.glance.text.TextStyle
 
 @Composable
 fun TaskTile(
-    taskID: Int,
-    task: String,
-    isCompleted: Boolean,
+    task: Task,
     selectedTabId: Int,
     selectedImage: ImageProvider,
     unselectedImage: ImageProvider,
 ) {
     Column(modifier = GlanceModifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            if (isCompleted) SelectedBox(taskID, selectedImage) else UnSelectedBox(taskID,
+            if (task.isCompleted) SelectedBox(task.uid,
+                selectedImage) else UnSelectedBox(task.tabID,
                 unselectedImage)
             Spacer(modifier = GlanceModifier.width(8.dp))
-            Text(task, style = TextStyle(fontSize = 16.sp), modifier = GlanceModifier.clickable(
-                actionStartActivity(
-                    Intent(
-                        LocalContext.current,
-                        AddTaskActivity::class.java
-                    ).addFlags(
-                        Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-                                and Intent.FLAG_ACTIVITY_NEW_TASK
-                                and Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    ),
-                    actionParametersOf(
-                        Constants.PARAM_SELECTED_TAB_ID to selectedTabId,
-                        Constants.PARAM_IS_EDIT_TASK to true,
-                        Constants.PARAM_TASK_CONTENT to task,
-                        Constants.PARAM_TASK_ID to taskID,
-                        Constants.PARAM_IS_TASK_COMPLETED to isCompleted
+            Text(task.content,
+                style = TextStyle(fontSize = 16.sp),
+                modifier = GlanceModifier.clickable(
+                    actionStartActivity(
+                        Intent(
+                            LocalContext.current,
+                            AddTaskActivity::class.java
+                        ).setFlags(
+                            Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                                    and Intent.FLAG_ACTIVITY_NEW_TASK
+                                    and Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        ),
+                        actionParametersOf(
+                            Constants.PARAM_SELECTED_TAB_ID to selectedTabId,
+                            Constants.PARAM_IS_EDIT_TASK to true,
+                            Constants.PARAM_TASK_CONTENT to task.content,
+                            Constants.PARAM_TASK_ID to task.uid,
+                            Constants.PARAM_IS_TASK_COMPLETED to task.isCompleted,
+                            Constants.PARAM_TASK_CREATED_AT to task.createdAt,
+                        )
                     )
-                )
-            ))
+                ))
         }
     }
 }
