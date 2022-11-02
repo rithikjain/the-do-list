@@ -30,7 +30,7 @@ fun TaskTile(
     Column(modifier = GlanceModifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             if (task.isCompleted) SelectedBox(task.uid,
-                selectedImage) else UnSelectedBox(task.tabID,
+                selectedImage) else UnSelectedBox(task.uid,
                 unselectedImage)
             Spacer(modifier = GlanceModifier.width(8.dp))
             Text(task.content,

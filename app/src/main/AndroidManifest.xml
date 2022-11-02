@@ -12,7 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheDoList"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.screens.settings.SettingsActivity"
+            android:autoRemoveFromRecents="true"
+            android:exported="true"
+            android:label="@string/title_activity_settings"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.AppCompat.Translucent"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.screens.add_task.AddTaskActivity"
             android:autoRemoveFromRecents="true"
@@ -21,7 +28,6 @@
             android:launchMode="singleInstance"
             android:theme="@style/Theme.AppCompat.Translucent"
             android:windowSoftInputMode="adjustResize" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true"

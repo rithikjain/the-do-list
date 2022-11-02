@@ -5,10 +5,8 @@ import `in`.rithikjain.thedolist.utils.Constants
 import `in`.rithikjain.thedolist.widget.TheDoListWidget
 import android.content.Context
 import androidx.glance.GlanceId
-import androidx.glance.LocalContext
 import androidx.glance.action.ActionParameters
 import androidx.glance.appwidget.action.ActionCallback
-import androidx.glance.appwidget.state.updateAppWidgetState
 
 class SetTaskStatusActionCallback : ActionCallback {
 
