@@ -235,6 +235,7 @@ class AddTaskActivity : ComponentActivity() {
 
     override fun onPause() {
         super.onPause()
+        finish()
         if (isFinishing) {
             overridePendingTransition(0, 0)
         }
