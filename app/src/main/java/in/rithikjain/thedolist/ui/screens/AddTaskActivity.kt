@@ -40,14 +40,25 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
 
 class AddTaskActivity : ComponentActivity() {
+
+    private var tabID = -1
+    private var isEditTask = false
+    private var taskContent = ""
+    private var taskID = -1
+    private var isTaskCompleted = false
+
     @OptIn(ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var tabID = -1
-
         intent?.extras?.let {
             tabID = it.getInt(Constants.SELECTED_TAB_ID_KEY)
+            isEditTask = it.getBoolean(Constants.IS_EDIT_TASK_KEY)
+            it.getString(Constants.TASK_CONTENT_KEY)?.let { content ->
+                taskContent = content
+            }
+            taskID = it.getInt(Constants.TASK_ID_KEY)
+            isTaskCompleted = it.getBoolean(Constants.IS_TASK_COMPLETED_KEY)
         }
 
         setContent {
@@ -55,11 +66,6 @@ class AddTaskActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = Color.Transparent
             ) {
-
-                val drawable = AppCompatResources.getDrawable(
-                    LocalContext.current,
-                    tabs[tabID]!!.tasksUnselectedImage
-                )
 
                 val focusRequester = FocusRequester()
 
@@ -83,13 +89,20 @@ class AddTaskActivity : ComponentActivity() {
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Image(
-                                painter = rememberDrawablePainter(drawable = drawable),
+                                painter = rememberDrawablePainter(AppCompatResources.getDrawable(
+                                    LocalContext.current,
+                                    if (isTaskCompleted) {
+                                        tabs[tabID]!!.tasksSelectedImage
+                                    } else {
+                                        tabs[tabID]!!.tasksUnselectedImage
+                                    }
+                                )),
                                 contentDescription = "Task Unselected Box",
                                 modifier = Modifier.size(18.dp),
                             )
 
                             val keyboardController = LocalSoftwareKeyboardController.current
-                            var text by remember { mutableStateOf("") }
+                            var text by remember { mutableStateOf(taskContent) }
 
                             Box(modifier = Modifier
                                 .weight(1f)
@@ -106,7 +119,7 @@ class AddTaskActivity : ComponentActivity() {
                                     keyboardActions = KeyboardActions(
                                         onDone = { keyboardController?.hide() }
                                     ),
-                                            cursorBrush = SolidColor (Color.White),
+                                    cursorBrush = SolidColor(Color.White),
                                     textStyle = TextStyle(color = Color.White, fontSize = 15.sp),
                                     modifier = Modifier.focusRequester(focusRequester)
                                 )
@@ -123,7 +136,7 @@ class AddTaskActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .size(22.dp)
                                     .clickable {
-                                        insertTask(text.trim(), tabID)
+                                        upsertTask(text.trim())
                                     },
                                 colorFilter = ColorFilter.tint(Color.LightGray)
                             )
@@ -134,18 +147,29 @@ class AddTaskActivity : ComponentActivity() {
         }
     }
 
-    private fun insertTask(content: String, tabID: Int) {
+    private fun upsertTask(content: String) {
         val db = AppDatabase.getInstance(this)
 
-        lifecycleScope.launch {
-            db.tasksDao().insertTask(Task(content = content, tabID = tabID, isCompleted = false))
-            val glanceID =
-                GlanceAppWidgetManager(this@AddTaskActivity).getGlanceIds(TheDoListWidget::class.java)
-                    .firstOrNull()
-            if (glanceID != null) {
-                TheDoListWidget().update(this@AddTaskActivity, glanceID)
-            }
+        if (content.isEmpty()) {
             finish()
+        } else {
+            lifecycleScope.launch {
+                if (isEditTask) {
+                    db.tasksDao().updateTask(taskID, content)
+                } else {
+                    db.tasksDao().insertTask(
+                        Task(content = content, tabID = tabID, isCompleted = false)
+                    )
+                }
+
+                val glanceID =
+                    GlanceAppWidgetManager(this@AddTaskActivity).getGlanceIds(TheDoListWidget::class.java)
+                        .firstOrNull()
+                if (glanceID != null) {
+                    TheDoListWidget().update(this@AddTaskActivity, glanceID)
+                }
+                finish()
+            }
         }
     }
 

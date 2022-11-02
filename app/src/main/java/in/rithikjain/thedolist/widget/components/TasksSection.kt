@@ -28,6 +28,7 @@ fun TasksSection(tab: Tab) {
                 taskID = task.uid,
                 task = task.content,
                 isCompleted = task.isCompleted,
+                selectedTabId = tab.id,
                 selectedImage = ImageProvider(tab.tasksSelectedImage),
                 unselectedImage = ImageProvider(tab.tasksUnselectedImage),
             )
