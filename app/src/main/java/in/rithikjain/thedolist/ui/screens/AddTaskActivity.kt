@@ -15,10 +15,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -26,7 +29,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.appwidget.GlanceAppWidgetManager
@@ -35,6 +40,7 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import kotlinx.coroutines.launch
 
 class AddTaskActivity : ComponentActivity() {
+    @OptIn(ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -82,6 +88,7 @@ class AddTaskActivity : ComponentActivity() {
                                 modifier = Modifier.size(18.dp),
                             )
 
+                            val keyboardController = LocalSoftwareKeyboardController.current
                             var text by remember { mutableStateOf("") }
 
                             Box(modifier = Modifier
@@ -95,7 +102,11 @@ class AddTaskActivity : ComponentActivity() {
                                     onValueChange = {
                                         text = it
                                     },
-                                    cursorBrush = SolidColor(Color.White),
+                                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                                    keyboardActions = KeyboardActions(
+                                        onDone = { keyboardController?.hide() }
+                                    ),
+                                            cursorBrush = SolidColor (Color.White),
                                     textStyle = TextStyle(color = Color.White, fontSize = 15.sp),
                                     modifier = Modifier.focusRequester(focusRequester)
                                 )
