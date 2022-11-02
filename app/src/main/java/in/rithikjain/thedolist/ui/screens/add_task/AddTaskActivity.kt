@@ -46,7 +46,7 @@ import java.util.*
 
 class AddTaskActivity : ComponentActivity() {
 
-    private var tabID = -1
+    private var tabID = 1
     private var isEditTask = false
     private var taskContent = ""
     private var taskID = -1
