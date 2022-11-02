@@ -18,4 +18,7 @@ interface TasksDao {
 
     @Query("UPDATE task SET content=:content WHERE uid=:taskID")
     suspend fun updateTask(taskID: Int, content: String)
+
+    @Query("DELETE FROM task WHERE uid=:taskID")
+    suspend fun deleteTask(taskID: Int)
 }

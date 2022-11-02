@@ -1,4 +1,4 @@
-package `in`.rithikjain.thedolist.ui.screens
+package `in`.rithikjain.thedolist.ui.screens.add_task
 
 import `in`.rithikjain.thedolist.R
 import `in`.rithikjain.thedolist.db.AppDatabase
@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Divider
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -80,7 +81,7 @@ class AddTaskActivity : ComponentActivity() {
                         .clickable {
                             finish()
                         })
-                    Box(
+                    Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .background(Color(0xFF161616))
@@ -141,6 +142,38 @@ class AddTaskActivity : ComponentActivity() {
                                 colorFilter = ColorFilter.tint(Color.LightGray)
                             )
                         }
+
+                        if (isEditTask) {
+                            Divider(modifier = Modifier.padding(top = 18.dp),
+                                color = Color.DarkGray,
+                                thickness = 0.5.dp)
+
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 8.dp)
+                            ) {
+                                Image(
+                                    painter = rememberDrawablePainter(
+                                        AppCompatResources.getDrawable(
+                                            LocalContext.current,
+                                            R.drawable.ic_delete
+                                        )
+                                    ),
+                                    contentDescription = "Delete Task Button",
+                                    modifier = Modifier
+                                        .size(20.dp)
+                                        .clickable {
+                                            deleteTask()
+                                        },
+                                    colorFilter = ColorFilter.tint(Color.Gray)
+                                )
+
+                                Text("Created on 2 Nov 2022", fontSize = 14.sp, color = Color.Gray)
+                            }
+                        }
                     }
                 }
             }
@@ -170,6 +203,21 @@ class AddTaskActivity : ComponentActivity() {
                 }
                 finish()
             }
+        }
+    }
+
+    private fun deleteTask() {
+        val db = AppDatabase.getInstance(this)
+
+        lifecycleScope.launch {
+            db.tasksDao().deleteTask(taskID)
+            val glanceID =
+                GlanceAppWidgetManager(this@AddTaskActivity).getGlanceIds(TheDoListWidget::class.java)
+                    .firstOrNull()
+            if (glanceID != null) {
+                TheDoListWidget().update(this@AddTaskActivity, glanceID)
+            }
+            finish()
         }
     }
 

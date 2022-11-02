@@ -1,11 +1,10 @@
 package `in`.rithikjain.thedolist.widget.components
 
-import `in`.rithikjain.thedolist.ui.screens.AddTaskActivity
+import `in`.rithikjain.thedolist.ui.screens.add_task.AddTaskActivity
 import `in`.rithikjain.thedolist.utils.Constants
 import `in`.rithikjain.thedolist.widget.actions.SetTaskStatusActionCallback
 import android.content.Intent
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.GlanceModifier

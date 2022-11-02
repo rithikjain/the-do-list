@@ -1,7 +1,7 @@
 package `in`.rithikjain.thedolist.widget.components
 
 import `in`.rithikjain.thedolist.R
-import `in`.rithikjain.thedolist.ui.screens.AddTaskActivity
+import `in`.rithikjain.thedolist.ui.screens.add_task.AddTaskActivity
 import `in`.rithikjain.thedolist.utils.Constants
 import android.content.Intent
 import androidx.compose.runtime.Composable
@@ -27,7 +27,7 @@ fun ActionBar(selectedTabId: Int) {
         Image(
             ImageProvider(R.drawable.ic_add),
             contentDescription = "Add Icon",
-            modifier = GlanceModifier.size(22.dp).clickable(actionStartActivity(
+            modifier = GlanceModifier.size(24.dp).clickable(actionStartActivity(
                 Intent(
                     LocalContext.current,
                     AddTaskActivity::class.java
