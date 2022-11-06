@@ -20,6 +20,7 @@ import androidx.glance.background
 import androidx.glance.layout.*
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
+import androidx.glance.unit.ColorProvider
 
 @Composable
 fun TaskTile(
@@ -35,7 +36,7 @@ fun TaskTile(
                 unselectedImage)
             Spacer(modifier = GlanceModifier.width(8.dp))
             Text(task.content,
-                style = TextStyle(fontSize = 16.sp),
+                style = TextStyle(fontSize = 16.sp, color = ColorProvider(Color.White)),
                 modifier = GlanceModifier.padding(top = (-4).dp).clickable(
                     actionStartActivity(
                         Intent(
